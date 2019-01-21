@@ -13,7 +13,6 @@
       "Action": [
         "dynamodb:CreateBackup",
         "dynamodb:DeleteBackup",
-        "dynamodb:DeleteBackup",
         "dynamodb:ListBackups"
       ],
       "Effect": "Allow",
