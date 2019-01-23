@@ -11,7 +11,7 @@ s3 = boto3.resource('s3')
 
 
 def lambda_handler(event, context):
-    print("Received event: " + json.dumps(event, indent=2))
+    print("Received event: " + json.dumps(event))
 
     # Get the object from the event
     key = urllib.parse.unquote_plus(
@@ -46,13 +46,8 @@ def lambda_handler(event, context):
     print("job={}".format(job))
     job_id = job['Job']['Id']
 
-    # Wait the job completed
+    # Wait for the job to complete
     waiter = transcoder.get_waiter('job_complete')
     waiter.wait(Id=job_id)
     end_time = datetime.now().strftime("%H:%M:%S.%f")[:-3]
     print("end time={}".format(end_time))
-
-
-if __name__ == '__main__':
-    event = {'TableName': 'Person'}
-    lambda_handler(event, {})
