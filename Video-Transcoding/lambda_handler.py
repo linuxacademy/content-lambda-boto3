@@ -23,20 +23,17 @@ def lambda_handler(event, context):
     job = transcoder.create_job(
         PipelineId=PIPELINE_ID,
         Input={
-            'Key': key,
-            'FrameRate': 'auto',
-            'Resolution': 'auto',
-            'AspectRatio': 'auto',
-            'Interlaced': 'auto',
-            'Container': 'auto',
+            'Key': key
         },
         Outputs=[
             {
                 'Key': filename + '-1080p.mp4',
+                'ThumbnailPattern': filename + '-{resolution}-{count}',
                 'PresetId': '1351620000001-000001'  # Generic 1080p
             },
             {
                 'Key': filename + '-720p.mp4',
+                'ThumbnailPattern': filename + '-{resolution}-{count}',
                 'PresetId': '1351620000001-000010'  # Generic 720p
             }
         ]
