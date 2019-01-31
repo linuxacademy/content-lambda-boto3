@@ -1,5 +1,3 @@
-from datetime import datetime
-
 import boto3
 
 
@@ -13,18 +11,20 @@ def lambda_handler(event, context):
     for region in regions:
         print("Region:", region)
         ec2 = boto3.client('ec2', region_name=region)
-        snapshots = ec2.describe_snapshots(OwnerIds=[account_id])
+        response = ec2.describe_snapshots(OwnerIds=[account_id])
+        snapshots = response["Snapshots"]
 
-        for snapshot in snapshots['Snapshots']:
-            print("Found snapshot:", snapshot)
-            start_time = snapshot['StartTime'].date()
-            today = datetime.utcnow().date()
-            age = today - start_time
+        # Sort snapshots by date ascending
+        snapshots.sort(key=lambda x: x["StartTime"])
+
+        # Remove snapshots we want to keep (i.e. 3 most recent)
+        snapshots = snapshots[:-3]
+
+        for snapshot in snapshots:
+            id = snapshot['SnapshotId']
             try:
-                if age.days > 30:
-                    id = snapshot['SnapshotId']
-                    print("Deleting snapshot:", id)
-                    ec2.delete_snapshot(SnapshotId=id)
+                print("Deleting snapshot:", id)
+                ec2.delete_snapshot(SnapshotId=id)
             except Exception as e:
                 if 'InvalidSnapshot.InUse' in e.message:
                     print("Snapshot {} in use, skipping.".format(id))

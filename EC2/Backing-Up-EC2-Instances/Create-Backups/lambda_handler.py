@@ -20,6 +20,7 @@ def lambda_handler(event, context):
             ]
         )
 
+        # ISO 8601 timestamp, i.e. 2019-01-31T14:01:58
         timestamp = datetime.utcnow().replace(microsecond=0).isoformat()
 
         for i in instances.all():
