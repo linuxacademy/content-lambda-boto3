@@ -1,7 +1,7 @@
 import boto3
 
 
-def lambda_handler(event, context):
+def lambda_handler(object, context):
 
     # Get list of regions
     ec2_client = boto3.client('ec2')

@@ -1,13 +1,22 @@
 {
   "Version": "2012-10-17",
   "Statement": [{
-    "Sid": "1",
-    "Effect": "Allow",
-    "Action": [
-      "ec2:DeleteVolume",
-      "ec2:DescribeRegions",
-      "ec2:DescribeVolumes"
-    ],
-    "Resource": "*"
-  }]
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DeleteVolume",
+        "ec2:DescribeRegions",
+        "ec2:DescribeVolumes"
+      ],
+      "Resource": "*"
+    }
+  ]
 }
