@@ -10,4 +10,4 @@ Sign in to the AWS Management Console and click the button below to launch the `
 
 [![Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?templateURL=https:%2F%2Fs3.amazonaws.com%2Fsolutions-reference%2Faws-instance-scheduler%2Flatest%2Finstance-scheduler.template)
 
-You can also [download the template](aws-instance-scheduler.json) as a starting point for your own implementation.
+You can also [download the template](https://raw.githubusercontent.com/linuxacademy/content-lambda-boto3/master/EC2/AWS-Instance-Scheduler/aws-instance-scheduler.json) as a starting point for your own implementation.
