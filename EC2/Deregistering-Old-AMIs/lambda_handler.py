@@ -10,7 +10,7 @@ def days_old(date):
     return diff.days
 
 
-def lambda_handler(object, context):
+def lambda_handler(event, context):
 
     # Get list of regions
     ec2_client = boto3.client('ec2')
