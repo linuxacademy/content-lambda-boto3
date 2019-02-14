@@ -34,7 +34,6 @@ def read_csv(file):
             data['Year'] = int(row['Year'])
             data['Title'] = row['Title'] or None
             data['Meta']['Length'] = int(row['Length'] or 0)
-            data['Meta']['Length'] = int(row['Length'] or 0)
             data['Meta']['Subject'] = row['Subject'] or None
             data['Meta']['Actor'] = row['Actor'] or None
             data['Meta']['Actress'] = row['Actress'] or None
