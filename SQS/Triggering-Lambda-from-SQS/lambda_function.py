@@ -1,6 +1,7 @@
-from datetime import datetime
 import json
 import os
+from datetime import datetime
+
 import boto3
 
 QUEUE_NAME = os.environ['QUEUE_NAME']

@@ -4,9 +4,9 @@ import argparse
 import logging
 import sys
 from time import sleep
+
 import boto3
 from faker import Faker
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--queue-name", "-q", required=True,

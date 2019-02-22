@@ -11,11 +11,19 @@
     },
     {
       "Action": [
-        "dynamodb:*",
-        "sqs:*"
+        "dynamodb:PutItem"
       ],
       "Effect": "Allow",
-      "Resource": "*"
+      "Resource": "arn:aws:dynamodb:us-east-1:123456789012:table/Message"
+    },
+    {
+      "Action": [
+        "sqs:Describe*",
+        "sqs:Get*",
+        "sqs:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:sqs:us-east-1:123456789012:Messages"
     }
   ]
 }
