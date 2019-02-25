@@ -1,4 +1,4 @@
-# Creating a Queue Using Cross-Account Roles
+# Creating a Queue Using Cross-Account Permissions
 
 SQS does not allow API calls such as [`CreateQueue`](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_CreateQueue.html) using [cross-account permissions](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html#access-control). A workaround is to create and invoke a Lambda function in another account, in order to call that API.)
 
