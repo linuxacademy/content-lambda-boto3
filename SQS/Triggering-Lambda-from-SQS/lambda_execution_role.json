@@ -20,7 +20,9 @@
       "Action": [
         "sqs:Describe*",
         "sqs:Get*",
-        "sqs:List*"
+        "sqs:List*",
+        "sqs:DeleteMessage",
+        "sqs:ReceiveMessage"
       ],
       "Effect": "Allow",
       "Resource": "arn:aws:sqs:us-east-1:123456789012:Messages"
