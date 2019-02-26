@@ -1,0 +1,64 @@
+{
+  "version": "0",
+  "id": "e3f9c65c-6b72-3ce4-b1f3-20494cbc87e0",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.ec2",
+  "account": "111111111111",
+  "time": "2019-02-25T15:33:07Z",
+  "region": "us-east-1",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.05",
+    "userIdentity": {
+      "type": "Root",
+      "principalId": "111111111111",
+      "arn": "arn:aws:iam::111111111111:root",
+      "accountId": "111111111111",
+      "accessKeyId": "...",
+      "sessionContext": {
+        "attributes": {
+          "mfaAuthenticated": "false",
+          "creationDate": "2019-02-25T14:13:11Z"
+        }
+      },
+      "invokedBy": "signin.amazonaws.com"
+    },
+    "eventTime": "2019-02-25T15:33:07Z",
+    "eventSource": "ec2.amazonaws.com",
+    "eventName": "CreateVpc",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "73.125.25.100",
+    "userAgent": "signin.amazonaws.com",
+    "requestParameters": {
+      "cidrBlock": "10.0.0.0/16",
+      "instanceTenancy": "default"
+    },
+    "responseElements": {
+      "requestId": "ee1f6203-3e40-4669-a50b-17c52abc69b7",
+      "vpc": {
+        "vpcId": "vpc-0a71e831cb5152c43",
+        "state": "pending",
+        "cidrBlock": "10.0.0.0/16",
+        "cidrBlockAssociationSet": {
+          "items": [
+            {
+              "cidrBlock": "10.0.0.0/16",
+              "associationId": "vpc-cidr-assoc-07ba205e048b7798a",
+              "cidrBlockState": {
+                "state": "associated"
+              }
+            }
+          ]
+        },
+        "ipv6CidrBlockAssociationSet": {},
+        "dhcpOptionsId": "dopt-c0bf6fbb",
+        "instanceTenancy": "default",
+        "tagSet": {},
+        "isDefault": false
+      }
+    },
+    "requestID": "ee1f6203-3e40-4669-a50b-17c52abc69b7",
+    "eventID": "9be08716-256d-4286-9378-8137d661109b",
+    "eventType": "AwsApiCall"
+  }
+}
