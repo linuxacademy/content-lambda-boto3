@@ -3,7 +3,6 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 
-FLOWLOGS_GROUP_NAME = os.environ['FLOWLOGS_GROUP_NAME']
 ROLE_ARN = os.environ['ROLE_ARN']
 
 ec2 = boto3.client('ec2')
@@ -16,13 +15,15 @@ def lambda_handler(event, context):
         # Extract the VPC ID from the event
         vpc_id = event['detail']['responseElements']['vpc']['vpcId']
 
+        flow_logs_group = 'VPCFlowLogs-' + vpc_id
+
         print('VPC: ' + vpc_id)
 
         try:
             response = logs.create_log_group(
-                logGroupName=FLOWLOGS_GROUP_NAME)
+                logGroupName=flow_logs_group)
         except ClientError:
-            print(f"Log group '{FLOWLOGS_GROUP_NAME}' already exists.")
+            print(f"Log group '{flow_logs_group}' already exists.")
 
         # Get Flow Logs status
         response = ec2.describe_flow_logs(
@@ -45,7 +46,7 @@ def lambda_handler(event, context):
                 ResourceIds=[vpc_id],
                 ResourceType='VPC',
                 TrafficType='ALL',
-                LogGroupName=FLOWLOGS_GROUP_NAME,
+                LogGroupName=flow_logs_group,
                 DeliverLogsPermissionArn=ROLE_ARN,
             )
 
