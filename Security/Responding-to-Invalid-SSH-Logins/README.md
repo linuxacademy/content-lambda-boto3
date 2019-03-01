@@ -24,6 +24,8 @@ Name the role `CloudWatchAgentAdminRole`.
 
 Select **Amazon Linux 2**.
 
+Create or select a security group with SSH (port 22) open to the public (`0.0.0.0/0`).
+
 ### Attach the IAM Role to the Instance
 
 Assign the `CloudWatchAgentAdminRole` IAM role to the EC2 instance.
@@ -44,7 +46,7 @@ Create a new session using SSM Session Manager.
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
 ```
 
-Do **not** install CollectD.
+**Note: Do not select CollectD, unless you already installed it using `sudo yum install collectd`.**
 
 Specify `/var/log/secure` for "Do you want to monitor any log files?"
 
