@@ -93,6 +93,8 @@ Click **Create alarm**.
 Name: `InvalidSSHLoginAlarm`  
 Description: `Invalid login attempts >2 in 1 min for instance ` _\<append instance ID>_
 
+**Note: The description is critical, as the instance ID at the end is used by the Lambda function to stop the instance.**
+
 Whenever `InvalidSSHLogin` >= `2` for 1 out of 1 datapoints
 
 ### Subscribe to SNS Topic
