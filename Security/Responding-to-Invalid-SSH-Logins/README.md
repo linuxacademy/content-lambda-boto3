@@ -1,6 +1,6 @@
 # Responding to Invalid SSH Logins
 
-In this lesson, we'll explore a real-world scenario where an EC2 instance is experiencing multiple failed logins and we want to automatically take the instance offline in response to this event.
+In this lesson, we'll explore a real-world scenario where an EC2 instance is experiencing multiple failed SSH logins, and we want to automatically take the instance offline in response to this potential security event.
 
 Use the Web Server Log Group and the Invalid SSH Login metric filter to trigger a CloudWatch alarm set for 2 data points within 1 minute.
 
