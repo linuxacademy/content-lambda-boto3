@@ -1,0 +1,19 @@
+{
+  "detail-type": [
+    "AWS API Call via CloudTrail"
+  ],
+  "detail": {
+    "eventSource": [
+      "s3.amazonaws.com"
+    ],
+    "eventName": [
+      "PutObjectAcl",
+      "PutObject"
+    ],
+    "requestParameters": {
+      "bucketName": [
+        "everything-must-be-private"
+      ]
+    }
+  }
+}
