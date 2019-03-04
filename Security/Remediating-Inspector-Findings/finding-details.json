@@ -1,0 +1,341 @@
+{
+  "arn": "arn:aws:inspector:us-east-2:123456789012:target/0-j7k6kbKM/template/0-zfQemawC/run/0-BTVkArU2/finding/0-PB3jAlHR",
+  "assetAttributes": {
+    "agentId": "i-059cc55d140dfba1d",
+    "amiId": "ami-d80c35bd",
+    "hostname": "ec2-18-218-215-57.us-east-2.compute.amazonaws.com",
+    "ipv4Addresses": [],
+    "networkInterfaces": [{
+      "ipv6Addresses": [],
+      "networkInterfaceId": "eni-0ebdc0e0ae7d5387c",
+      "privateDnsName": "ip-172-31-38-109.us-east-2.compute.internal",
+      "privateIpAddress": "172.31.38.109",
+      "privateIpAddresses": [{
+        "privateDnsName": "ip-172-31-38-109.us-east-2.compute.internal",
+        "privateIpAddress": "172.31.38.109"
+      }],
+      "publicDnsName": "ec2-18-218-215-57.us-east-2.compute.amazonaws.com",
+      "publicIp": "18.218.215.57",
+      "securityGroups": [{
+        "groupId": "sg-014c0919b70bfde82",
+        "groupName": "launch-wizard-6"
+      }],
+      "subnetId": "subnet-8d7b65c0",
+      "vpcId": "vpc-a5c487cd"
+    }],
+    "schemaVersion": 1,
+    "tags": [{
+      "key": "Name",
+      "value": "AmazonLinux2018"
+    }]
+  },
+  "assetType": "ec2-instance",
+  "attributes": [{
+      "key": "CVSS3_SCORE",
+      "value": "7.5"
+    },
+    {
+      "key": "package_name",
+      "value": "kernel-0:4.14.47-64.38.amzn2"
+    },
+    {
+      "key": "CVSS3_VECTOR",
+      "value": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+    },
+    {
+      "key": "CVE_ID",
+      "value": "CVE-2018-5390"
+    },
+    {
+      "key": "CVSS2_VECTOR",
+      "value": "AV:N/AC:L/Au:N/C:N/I:N/A:C"
+    },
+    {
+      "key": "INSTANCE_ID",
+      "value": "i-059cc55d140dfba1d"
+    },
+    {
+      "key": "CVSS2_SCORE",
+      "value": "7.8"
+    }
+  ],
+  "confidence": 10,
+  "createdAt": 1551666773.399,
+  "description": {
+    "message": "Linux kernel versions 4.9+ can be forced to make very expensive calls to tcp_collapse_ofo_queue() and tcp_prune_ofo_queue() for every incoming packet which can lead to a denial of service."
+  },
+  "id": "CVE-2018-5390",
+  "indicatorOfCompromise": false,
+  "numericSeverity": 9,
+  "recommendation": {
+    "message": "Use your Operating System's update feature to update package kernel-0:4.14.47-64.38.amzn2. For more information see <a href=\"https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5390\" target=\"_blank\">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5390</a>"
+  },
+  "schemaVersion": 1,
+  "service": "Inspector",
+  "serviceAttributes": {
+    "assessmentRunArn": "arn:aws:inspector:us-east-2:123456789012:target/0-j7k6kbKM/template/0-zfQemawC/run/0-BTVkArU2",
+    "rulesPackageArn": "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-JnA8Zp85",
+    "schemaVersion": 1
+  },
+  "severity": "High",
+  "title": {
+    "message": "Instance i-059cc55d140dfba1d is vulnerable to CVE-2018-5390"
+  },
+  "updatedAt": 1551666773.399,
+  "userAttributes": [],
+  "attributesAsHash": {},
+  "CVSS3_SCORE": "7.5",
+  "CVSS3_VECTOR": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+  "CVSS2_VECTOR": "AV:N/AC:L/Au:N/C:N/I:N/A:C",
+  "CVSS2_SCORE": "7.8",
+  "rulesPackage": {
+    "arn": "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-JnA8Zp85",
+    "description": "The rules in this package help verify whether the EC2 instances in your application are exposed to Common Vulnerabilities and Exposures (CVEs). Attacks can exploit unpatched vulnerabilities to compromise the confidentiality, integrity, or availability of your service or data. The CVE system provides a reference for publicly known information security vulnerabilities and exposures. For more information, see [https://cve.mitre.org/](https://cve.mitre.org/). If a particular CVE appears in one of the produced Findings at the end of a completed Inspector assessment, you can search [https://cve.mitre.org/](https://cve.mitre.org/) using the CVE's ID (for example, \"CVE-2009-0021\") to find detailed information about this CVE, its severity, and how to mitigate it. ",
+    "name": "Common Vulnerabilities and Exposures",
+    "provider": "Amazon Web Services, Inc.",
+    "version": "1.1",
+    "nameWithVersion": "Common Vulnerabilities and Exposures-1.1"
+  },
+  "assessmentRun": {
+    "arn": "arn:aws:inspector:us-east-2:123456789012:target/0-j7k6kbKM/template/0-zfQemawC/run/0-BTVkArU2",
+    "assessmentTemplateArn": "arn:aws:inspector:us-east-2:123456789012:target/0-j7k6kbKM/template/0-zfQemawC",
+    "completedAt": 1551666775.277,
+    "createdAt": 1551663022.878,
+    "dataCollected": true,
+    "durationInSeconds": 3600,
+    "findingCounts": {
+      "High": 47,
+      "Informational": 4,
+      "Low": 3,
+      "Medium": 44
+    },
+    "name": "Run - All Assessments - 2019-03-04T01:30:18.220Z",
+    "notifications": [{
+        "date": 1551666684.823,
+        "error": false,
+        "event": "ASSESSMENT_RUN_STATE_CHANGED",
+        "snsPublishStatusCode": "SUCCESS",
+        "snsTopicArn": "arn:aws:sns:us-east-2:123456789012:Inspector"
+      },
+      {
+        "date": 1551666685.073,
+        "error": false,
+        "event": "ASSESSMENT_RUN_STATE_CHANGED",
+        "snsPublishStatusCode": "SUCCESS",
+        "snsTopicArn": "arn:aws:sns:us-east-2:123456789012:Inspector"
+      },
+      {
+        "date": 1551666685.849,
+        "error": false,
+        "event": "ASSESSMENT_RUN_STATE_CHANGED",
+        "snsPublishStatusCode": "SUCCESS",
+        "snsTopicArn": "arn:aws:sns:us-east-2:123456789012:Inspector"
+      },
+      {
+        "date": 1551666775.371,
+        "error": false,
+        "event": "ASSESSMENT_RUN_STATE_CHANGED",
+        "snsPublishStatusCode": "SUCCESS",
+        "snsTopicArn": "arn:aws:sns:us-east-2:123456789012:Inspector"
+      },
+      {
+        "date": 1551666775.406,
+        "error": false,
+        "event": "ASSESSMENT_RUN_COMPLETED",
+        "snsPublishStatusCode": "SUCCESS",
+        "snsTopicArn": "arn:aws:sns:us-east-2:123456789012:Inspector"
+      }
+    ],
+    "rulesPackageArns": [
+      "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-AxKmMHPX",
+      "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-UCYZFKPV",
+      "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-m8r61nnh",
+      "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-JnA8Zp85",
+      "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-cE4kTR30"
+    ],
+    "startedAt": 1551663023.916,
+    "state": "COMPLETED",
+    "stateChangedAt": 1551666775.277,
+    "stateChanges": [{
+        "state": "CREATED",
+        "stateChangedAt": 1551663022.878
+      },
+      {
+        "state": "START_DATA_COLLECTION_PENDING",
+        "stateChangedAt": 1551663022.976
+      },
+      {
+        "state": "COLLECTING_DATA",
+        "stateChangedAt": 1551663023.916
+      },
+      {
+        "state": "DATA_COLLECTED",
+        "stateChangedAt": 1551666684.743
+      },
+      {
+        "state": "START_EVALUATING_RULES_PENDING",
+        "stateChangedAt": 1551666685.015
+      },
+      {
+        "state": "EVALUATING_RULES",
+        "stateChangedAt": 1551666685.787
+      },
+      {
+        "state": "COMPLETED",
+        "stateChangedAt": 1551666775.277
+      }
+    ],
+    "userAttributesForFindings": [],
+    "attributesAsHash": {},
+    "findingCount": {
+      "result": 98
+    },
+    "duration": {
+      "value": 3600,
+      "label": "1 Hour (Recommended)"
+    }
+  },
+  "assessmentTemplate": {
+    "arn": "arn:aws:inspector:us-east-2:123456789012:target/0-j7k6kbKM/template/0-zfQemawC",
+    "assessmentRunCount": 1,
+    "assessmentTargetArn": "arn:aws:inspector:us-east-2:123456789012:target/0-j7k6kbKM",
+    "createdAt": 1551662945.038,
+    "durationInSeconds": 3600,
+    "lastAssessmentRunArn": "arn:aws:inspector:us-east-2:123456789012:target/0-j7k6kbKM/template/0-zfQemawC/run/0-BTVkArU2",
+    "name": "All Assessments",
+    "rulesPackageArns": [
+      "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-AxKmMHPX",
+      "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-UCYZFKPV",
+      "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-m8r61nnh",
+      "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-JnA8Zp85",
+      "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-cE4kTR30"
+    ],
+    "userAttributesForFindings": [],
+    "attributesAsHash": {},
+    "duration": {
+      "value": 3600,
+      "label": "1 Hour (Recommended)"
+    },
+    "lastAssessmentRunObject": {
+      "arn": "arn:aws:inspector:us-east-2:123456789012:target/0-j7k6kbKM/template/0-zfQemawC/run/0-BTVkArU2",
+      "assessmentTemplateArn": "arn:aws:inspector:us-east-2:123456789012:target/0-j7k6kbKM/template/0-zfQemawC",
+      "completedAt": 1551666775.277,
+      "createdAt": 1551663022.878,
+      "dataCollected": true,
+      "durationInSeconds": 3600,
+      "findingCounts": {
+        "High": 47,
+        "Informational": 4,
+        "Low": 3,
+        "Medium": 44
+      },
+      "name": "Run - All Assessments - 2019-03-04T01:30:18.220Z",
+      "notifications": [{
+          "date": 1551666684.823,
+          "error": false,
+          "event": "ASSESSMENT_RUN_STATE_CHANGED",
+          "snsPublishStatusCode": "SUCCESS",
+          "snsTopicArn": "arn:aws:sns:us-east-2:123456789012:Inspector"
+        },
+        {
+          "date": 1551666685.073,
+          "error": false,
+          "event": "ASSESSMENT_RUN_STATE_CHANGED",
+          "snsPublishStatusCode": "SUCCESS",
+          "snsTopicArn": "arn:aws:sns:us-east-2:123456789012:Inspector"
+        },
+        {
+          "date": 1551666685.849,
+          "error": false,
+          "event": "ASSESSMENT_RUN_STATE_CHANGED",
+          "snsPublishStatusCode": "SUCCESS",
+          "snsTopicArn": "arn:aws:sns:us-east-2:123456789012:Inspector"
+        },
+        {
+          "date": 1551666775.371,
+          "error": false,
+          "event": "ASSESSMENT_RUN_STATE_CHANGED",
+          "snsPublishStatusCode": "SUCCESS",
+          "snsTopicArn": "arn:aws:sns:us-east-2:123456789012:Inspector"
+        },
+        {
+          "date": 1551666775.406,
+          "error": false,
+          "event": "ASSESSMENT_RUN_COMPLETED",
+          "snsPublishStatusCode": "SUCCESS",
+          "snsTopicArn": "arn:aws:sns:us-east-2:123456789012:Inspector"
+        }
+      ],
+      "rulesPackageArns": [
+        "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-AxKmMHPX",
+        "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-UCYZFKPV",
+        "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-m8r61nnh",
+        "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-JnA8Zp85",
+        "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-cE4kTR30"
+      ],
+      "startedAt": 1551663023.916,
+      "state": "COMPLETED",
+      "stateChangedAt": 1551666775.277,
+      "stateChanges": [{
+          "state": "CREATED",
+          "stateChangedAt": 1551663022.878
+        },
+        {
+          "state": "START_DATA_COLLECTION_PENDING",
+          "stateChangedAt": 1551663022.976
+        },
+        {
+          "state": "COLLECTING_DATA",
+          "stateChangedAt": 1551663023.916
+        },
+        {
+          "state": "DATA_COLLECTED",
+          "stateChangedAt": 1551666684.743
+        },
+        {
+          "state": "START_EVALUATING_RULES_PENDING",
+          "stateChangedAt": 1551666685.015
+        },
+        {
+          "state": "EVALUATING_RULES",
+          "stateChangedAt": 1551666685.787
+        },
+        {
+          "state": "COMPLETED",
+          "stateChangedAt": 1551666775.277
+        }
+      ],
+      "userAttributesForFindings": [],
+      "attributesAsHash": {},
+      "findingCount": {
+        "result": 98
+      },
+      "duration": {
+        "value": 3600,
+        "label": "1 Hour (Recommended)"
+      }
+    }
+  },
+  "assessmentTarget": {
+    "arn": "arn:aws:inspector:us-east-2:123456789012:target/0-j7k6kbKM",
+    "createdAt": 1551662750.726,
+    "name": "AmazonLinux2018",
+    "resourceGroupArn": "arn:aws:inspector:us-east-2:123456789012:resourcegroup/0-YRYehH3N",
+    "updatedAt": 1551662750.726,
+    "resourceGroup": {
+      "arn": "arn:aws:inspector:us-east-2:123456789012:resourcegroup/0-YRYehH3N",
+      "createdAt": 1551662750.224,
+      "tags": [{
+        "key": "Name",
+        "value": "AmazonLinux2018"
+      }],
+      "tagsAsHash": {
+        "Name": [
+          "AmazonLinux2018"
+        ]
+      },
+      "tagsAsString": "Name:AmazonLinux2018"
+    },
+    "assessmentTemplatesCount": 1
+  }
+}
