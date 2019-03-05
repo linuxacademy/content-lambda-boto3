@@ -2,7 +2,7 @@
   "IncludeManagementEvents": false,
   "DataResources": [{
     "Values": [
-      "arn:aws:s3:::everything-must-be-private/"
+      "arn:aws:s3:::123456789012-everything-must-be-private/"
     ],
     "Type": "AWS::S3::Object"
   }],

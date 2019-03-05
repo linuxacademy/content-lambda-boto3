@@ -6,7 +6,7 @@
       "s3:GetObjectAcl",
       "s3:PutObjectAcl"
     ],
-    "Resource": "arn:aws:s3:::everything-must-be-private/*"
+    "Resource": "arn:aws:s3:::123456789012-everything-must-be-private/*"
   }, {
     "Effect": "Allow",
     "Action": [

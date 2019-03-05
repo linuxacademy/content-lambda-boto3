@@ -5,15 +5,15 @@ In this lesson, you'll learn how to detect unintended public access permissions 
 ## Create an S3 bucket
 
 ```sh
-aws s3api create-bucket --bucket everything-must-be-private
-aws s3api create-bucket --bucket bucket-for-my-object-level-s3-trail
+aws s3 mb s3://123456789012-everything-must-be-private
+aws s3 mb s3://123456789012-bucket-for-my-object-level-s3-trail
 ```
 
 Apply bucket policy:
 
 ```sh
 aws s3api put-bucket-policy \
---bucket bucket-for-my-object-level-s3-trail \
+--bucket 123456789012-bucket-for-my-object-level-s3-trail \
 --policy file://bucket_policy.json
 ```
 
@@ -22,10 +22,9 @@ aws s3api put-bucket-policy \
 ```sh
 aws cloudtrail create-trail \
 --name my-object-level-s3-trail \
---s3-bucket-name bucket-for-my-object-level-s3-trail
+--s3-bucket-name 123456789012-bucket-for-my-object-level-s3-trail
 
-aws cloudtrail start-logging \
---name my-object-level-s3-trail
+aws cloudtrail start-logging --name my-object-level-s3-trail
 ```
 
 Create event selectors:
@@ -62,30 +61,30 @@ For a `PutObjectAcl` API Event, the function gets the bucket and key name from t
 Zip Lambda function:
 
 ```sh
-zip -r9 CheckAndCorrectObjectACL.zip lambda_function.py
+zip -r9 RemediateObjectACL.zip lambda_function.py
 ```
 
 Create Lambda function:
 
 ```sh
 aws lambda create-function \
---function-name CheckAndCorrectObjectACL \
---zip-file fileb://CheckAndCorrectObjectACL.zip \
+--function-name RemediateObjectACL \
+--zip-file fileb://RemediateObjectACL.zip \
 --role arn:aws:iam::123456789012:role/AllowLogsAndS3ACL \
 --handler lambda_function.lambda_handler \
---runtime python3.7
---environment Variables={BUCKET_NAME=everything-must-be-private}
+--runtime python3.7 \
+--environment Variables={BUCKET_NAME=123456789012-everything-must-be-private}
 ```
 
 Allow CloudWatch Events to invoke Lambda:
 
 ```sh
 aws lambda add-permission \
---function-name CheckAndCorrectObjectACL \
+--function-name RemediateObjectACL \
 --statement-id AllowCloudWatchEventsToInvoke \
 --action 'lambda:InvokeFunction' \
 --principal events.amazonaws.com \
---source-arn arn:aws:events:us-east-1:123456789012:rule/S3ObjectACLAutoRemediate
+--source-arn arn:aws:events:us-east-2:123456789012:rule/S3ObjectACLAutoRemediate
 ```
 
 ## Create CloudWatch Events rule
@@ -103,18 +102,18 @@ Set Lambda function as the target:
 ```sh
 aws events put-targets \
 --rule S3ObjectACLAutoRemediate \
---targets Id=1,Arn=arn:aws:lambda:us-east-1:123456789012:function:CheckAndCorrectObjectACL
+--targets Id=1,Arn=arn:aws:lambda:us-east-2:123456789012:function:RemediateObjectACL
 ```
 
 ## Testing
 
 ```sh
 aws s3api put-object \
---bucket everything-must-be-private \
+--bucket 123456789012-everything-must-be-private \
 --key MyPersonalInfo
 
 aws s3api get-object-acl \
---bucket everything-must-be-private \
+--bucket 123456789012-everything-must-be-private \
 --key MyPersonalInfo
 ```
 
@@ -124,7 +123,7 @@ Add public read access, violating our policy:
 
 ```sh
 aws s3api put-object-acl \
---bucket everything-must-be-private \
+--bucket 123456789012-everything-must-be-private \
 --key MyPersonalInfo \
 --acl public-read
 ```
@@ -133,7 +132,7 @@ aws s3api put-object-acl \
 
 ```sh
 aws s3api get-object-acl \
---bucket everything-must-be-private \
+--bucket 123456789012-everything-must-be-private \
 --key MyPersonalInfo
 ```
 
@@ -150,3 +149,16 @@ You will see another grantee, allowing everyone to read the object:
 ```
 
 Describe the ACL again, and you'll see the Lambda function has removed public read access. Verify in CloudWatch Logs.
+
+## Cleanup
+
+```sh
+aws events remove-targets --rule S3ObjectACLAutoRemediate --ids "1"
+aws events delete-rule --name S3ObjectACLAutoRemediate
+aws lambda delete-function --function-name RemediateObjectACL
+aws iam delete-role-policy --role-name AllowLogsAndS3ACL --policy-name AllowLogsAndS3ACL
+aws iam delete-role --role-name AllowLogsAndS3ACL
+aws cloudtrail delete-trail --name my-object-level-s3-trail
+aws s3 rb s3://123456789012-bucket-for-my-object-level-s3-trail --force
+aws s3 rb s3://123456789012-everything-must-be-private --force
+```

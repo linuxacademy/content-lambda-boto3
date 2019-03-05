@@ -4,7 +4,7 @@ import boto3
 
 s3 = boto3.client('s3')
 
-BUCKET_NAME = os.environ('BUCKET_NAME')
+BUCKET_NAME = os.environ['BUCKET_NAME']
 
 
 def lambda_handler(event, context):

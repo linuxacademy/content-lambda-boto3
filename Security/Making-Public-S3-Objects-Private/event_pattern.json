@@ -12,7 +12,7 @@
     ],
     "requestParameters": {
       "bucketName": [
-        "everything-must-be-private"
+        "123456789012-everything-must-be-private"
       ]
     }
   }

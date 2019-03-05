@@ -6,14 +6,14 @@
           "Service": "cloudtrail.amazonaws.com"
       },
       "Action": "s3:GetBucketAcl",
-      "Resource": "arn:aws:s3:::bucket-for-my-object-level-s3-trail"
+      "Resource": "arn:aws:s3:::123456789012-bucket-for-my-object-level-s3-trail"
   }, {
       "Effect": "Allow",
       "Principal": {
           "Service": "cloudtrail.amazonaws.com"
       },
       "Action": "s3:PutObject",
-      "Resource": "arn:aws:s3:::bucket-for-my-object-level-s3-trail/AWSLogs/123456789012/*",
+      "Resource": "arn:aws:s3:::123456789012-bucket-for-my-object-level-s3-trail/*",
       "Condition": {
           "StringEquals": {
               "s3:x-amz-acl": "bucket-owner-full-control"
