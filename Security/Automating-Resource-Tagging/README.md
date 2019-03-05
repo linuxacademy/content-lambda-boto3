@@ -51,7 +51,7 @@ aws iam put-role-policy \
 
 ## Create Lambda Function
 
-Create function `AutomateTagging`.
+Create function `TagEC2Resources`.
 
 ## Create CloudWatch Rule
 
@@ -68,7 +68,7 @@ Set Lambda function as the target:
 ```sh
 aws events put-targets \
 --rule AutoTagResources \
---targets Id=1,Arn=arn:aws:lambda:us-east-2:123456789012:function:AutomateTagging
+--targets Id=1,Arn=arn:aws:lambda:us-east-2:123456789012:function:TagEC2Resources
 ```
 
 ## Create EC2 Instance as User
