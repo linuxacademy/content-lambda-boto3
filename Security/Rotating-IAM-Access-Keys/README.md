@@ -12,3 +12,9 @@ Lambda function:
 Scheduled CloudWatch trigger:
 
 - Triggers the Lambda to run, i.e. weekly
+
+## Amazon Simple Email Service (Amazon SES)
+
+Be sure to use an [SES-verified email address](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html) to ensure properly delivery of emails.
+
+SES API endpoints are not available in all regions. See [here](https://docs.aws.amazon.com/general/latest/gr/rande.html#ses_region) for a list of supported endpoints.
