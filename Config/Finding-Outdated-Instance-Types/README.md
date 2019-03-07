@@ -20,5 +20,5 @@ Create the Lambda function **CheckInstanceType**. Note the ARN for the next step
 8. Resources: **EC2: Instance**
 9. Rule parameters:
    - Key: `desiredInstanceType`
-   - Value: `t2.micro`
+   - Value: `t2.micro` or a comma-separated list, i.e. `t2.micro,t3.micro`. Any values **not** in this list will have the effect of **noncompliant**.
 10. Click **Save**
