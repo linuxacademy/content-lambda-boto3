@@ -5,11 +5,11 @@ Lambda function that revokes user access keys periodically to enforce rotation a
 Lambda function:
 
 - Collects IAM users using pagination
-- Scans each user for existing IAM Access keys
+- Scans each user for existing IAM Access keys older than 90 days
 - Deactivates the keys
 - Sends email alert to administrator
 
-Scheduled CloudWatch trigger:
+Scheduled CloudWatch Rule:
 
 - Triggers the Lambda to run, i.e. weekly
 
