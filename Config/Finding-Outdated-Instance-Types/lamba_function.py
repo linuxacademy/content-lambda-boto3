@@ -15,7 +15,7 @@ def lambda_handler(event, context):
         compliance_value = evaluate_compliance(
             invoking_event['configurationItem'], rule_parameters)
 
-    response = config.put_evaluations(
+    config.put_evaluations(
         Evaluations=[
             {
                 'ComplianceResourceType': invoking_event['configurationItem']['resourceType'],
@@ -31,12 +31,12 @@ def is_applicable(config_item, event):
     status = config_item['configurationItemStatus']
     event_left_scope = event['eventLeftScope']
     test = ((status in ['OK', 'ResourceDiscovered']) and
-            event_left_scope == False)
+            event_left_scope is False)
     return test
 
 
 def evaluate_compliance(config_item, rule_parameters):
-    if (config_item['resourceType'] != 'AWS::EC2::Instance'):
+    if config_item['resourceType'] != 'AWS::EC2::Instance':
         return 'NOT_APPLICABLE'
 
     instance_id = config_item['configuration']['instanceId']
