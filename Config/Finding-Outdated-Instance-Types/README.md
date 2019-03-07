@@ -6,7 +6,7 @@ In this lesson, we'll create a custom AWS Config rule to find outdated EC2 insta
 
 Create a role called **LambdaCheckInstanceTypeRole** and specify **AWS Config Rules permissions** as the policy template.
 
-Create the Lambda function `CheckInstanceType`. Note the ARN for the next steps.
+Create the Lambda function **CheckInstanceType**. Note the ARN for the next steps.
 
 ## Create AWS Config Rule
 
