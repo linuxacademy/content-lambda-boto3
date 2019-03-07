@@ -1,8 +1,3 @@
-# Trigger Type: Change Triggered
-# Scope of Changes: EC2:Instance
-# Required Parameter: desiredInstanceType
-# Example Value: t2.micro,t3.nano
-
 import boto3
 import json
 
@@ -10,7 +5,6 @@ config = boto3.client('config')
 
 
 def lambda_handler(event, context):
-    """Checks that all EC2 instances are of the type specified"""
     invoking_event = json.loads(event['invokingEvent'])
     rule_parameters = json.loads(event['ruleParameters'])
 
@@ -47,7 +41,7 @@ def evaluate_compliance(config_item, rule_parameters):
     instance_id = config_item['configuration']['instanceId']
     instance_type = config_item['configuration']['instanceType']
 
-    print(f"Instance {instance_id} {instance_type}")
+    print(f"Instance {instance_id} {instance_type} is ", end='')
 
     if (config_item['configuration']['instanceType'] in
             rule_parameters['desiredInstanceType']):

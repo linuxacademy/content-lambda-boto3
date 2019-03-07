@@ -12,7 +12,7 @@ Create the Lambda function. Note the ARN for the next steps.
 
 1. In the AWS Config console, select Rules, then click the **Add rule** button.
 2. Next, select **Add custom rule**.
-3. Name: **OutdatedInstanceTypes**
+3. Name: **DesiredInstanceTypes**
 4. Description: **Checks that all EC2 instances are of the type specified**
 5. Select the **AWS Lambda function ARN**, i.e. `arn:aws:lambda:us-east-1:123456789012:function:CheckInstanceType`
 6. Trigger type: **Configuration changes**
