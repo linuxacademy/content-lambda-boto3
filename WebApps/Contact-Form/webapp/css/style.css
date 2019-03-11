@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 5rem;
+}
+
+textarea {  
+  height: 100%;
+}
+
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}

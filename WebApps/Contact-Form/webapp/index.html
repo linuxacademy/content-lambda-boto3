@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Building a Contact Form with API Gateway and SES</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="/js/form.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"></nav>
+
+    <main role="main" class="container">
+
+        <div class="starter-template">
+            <h1>Building a Contact Form with API Gateway and SES</h1>
+            <p class="lead">Fill out this form and submit to API Gateway!</p>
+
+            <form id="mainForm">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="first_name">First name</label>
+                        <input type="text" class="form-control" id="first_name" placeholder="First name" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="last_name">Last name</label>
+                        <input type="text" class="form-control" id="last_name" placeholder="Last name" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="company">Company</label>
+                        <input type="text" class="form-control" id="company" placeholder="Company">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="address1">Address 1</label>
+                        <input type="text" class="form-control" id="address1" placeholder="Address 1">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="address2">Address 2</label>
+                        <input type="text" class="form-control" id="address2" placeholder="Address 2">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" placeholder="City">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" id="state" placeholder="State">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="zip">Zip</label>
+                        <input type="text" class="form-control" id="zip" placeholder="Zip">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" type="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" id="phone" placeholder="Phone" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="validationDefault10">Budget</label>
+                        <select class="custom-select" id="budget" required>
+                            <option value="">Budget</option>
+                            <option value="Under 5000">Under $5,000</option>
+                            <option value="5000-20000">$5,000-$20,000</option>
+                            <option value="Over 20000">Over $20,000</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <input type="textarea" class="form-control" id="message" placeholder="Message" rows="5" required>
+                </div>
+
+                <button id="submit" class="btn btn-primary" type="submit">Submit form</button>
+            </form>
+            <div id="form-response"></div>
+        </div>
+
+    </main>
+
+</body>
+
+</html>
