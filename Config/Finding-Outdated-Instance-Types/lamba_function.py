@@ -7,28 +7,28 @@ config = boto3.client('config')
 
 def lambda_handler(event, context):
     invoking_event = json.loads(event['invokingEvent'])
-    rule_parameters = json.loads(event['ruleParameters'])
+    rule_parameters = json.loads(event['ruleParameters'])  # i.e. 't2.micro'
 
     compliance_value = 'NOT_APPLICABLE'
+    item = invoking_event['configurationItem']  # one per AWS resource
 
-    if is_applicable(invoking_event['configurationItem'], event):
-        compliance_value = evaluate_compliance(
-            invoking_event['configurationItem'], rule_parameters)
+    if is_applicable(item, event):
+        compliance_value = evaluate_compliance(item, rule_parameters)
 
     config.put_evaluations(
         Evaluations=[
             {
-                'ComplianceResourceType': invoking_event['configurationItem']['resourceType'],
-                'ComplianceResourceId': invoking_event['configurationItem']['resourceId'],
+                'ComplianceResourceType': item['resourceType'],
+                'ComplianceResourceId': item['resourceId'],
                 'ComplianceType': compliance_value,
-                'OrderingTimestamp': invoking_event['configurationItem']['configurationItemCaptureTime']
+                'OrderingTimestamp': item['configurationItemCaptureTime']
             },
         ],
         ResultToken=event['resultToken'])
 
 
-def is_applicable(config_item, event):
-    status = config_item['configurationItemStatus']
+def is_applicable(item, event):
+    status = item['configurationItemStatus']
     event_left_scope = event['eventLeftScope']
     test = ((status in ['OK', 'ResourceDiscovered']) and
             event_left_scope is False)
