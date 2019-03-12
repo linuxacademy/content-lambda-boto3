@@ -30,77 +30,7 @@ Metadata:
           - ConfirmPassword
 
 Resources:
-  LambdaExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - lambda.amazonaws.com
-            Action:
-              - 'sts:AssumeRole'
-      Policies:
-        - PolicyName: lambdalogtocloudwatch
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Effect: Allow
-                Action:
-                  - 'logs:CreateLogGroup'
-                  - 'logs:CreateLogStream'
-                  - 'logs:PutLogEvents'
-                Resource: 'arn:aws:logs:*:*:*'
-  
-  CheckPasswordsFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      Code:
-        ZipFile: |
-          import json
 
-          import cfnresponse
-
-
-          def lambda_handler(event, context):
-              print(json.dumps(event))
-              response_data = {}
-              response_data['Data'] = None
-
-              if event['RequestType'] != 'Create':
-                  cfnresponse.send(event, context, cfnresponse.SUCCESS,
-                                  response_data, "CustomResourcePhysicalID")
-                  return
-
-              password = event['ResourceProperties']['Password']
-              confirm_password = event['ResourceProperties']['ConfirmPassword']
-
-              if password == confirm_password:
-                  cfnresponse.send(event, context, cfnresponse.SUCCESS,
-                                  response_data, "CustomResourcePhysicalID")
-              else:
-                  print('Passwords do not match!')
-                  cfnresponse.send(event, context, cfnresponse.FAILED,
-                                  response_data, "CustomResourcePhysicalID")
-      
-      Description: CloudFormation custom resource
-      FunctionName: CheckPasswords
-      Handler: index.lambda_handler
-      Runtime: python3.7
-      Timeout: 3
-      Role: !GetAtt LambdaExecutionRole.Arn
-  
-  TestPasswords:
-    Type: Custom::LambdaCallout
-    Properties:
-      ServiceToken: !GetAtt 
-        - CheckPasswordsFunction
-        - Arn
-      Password: !Ref Password
-      ConfirmPassword: !Ref ConfirmPassword
-  
   CFNUser:
     Type: AWS::IAM::User
     Properties:
@@ -108,7 +38,7 @@ Resources:
         Password: !Ref Password
   
   CFNUserGroup:
-    Type: 'AWS::IAM::Group'
+    Type: AWS::IAM::Group
   
   CFNAdminGroup:
     Type: AWS::IAM::Group
@@ -158,6 +88,75 @@ Resources:
     Type: AWS::IAM::AccessKey
     Properties:
       UserName: !Ref CFNUser
+
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: lambdalogtocloudwatch
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource: 'arn:aws:logs:*:*:*'
+
+  CheckPasswordsFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: |
+          import json
+
+          import cfnresponse
+
+
+          def lambda_handler(event, context):
+              print(json.dumps(event))
+              response_data = {}
+              response_data['Data'] = None
+
+              if event['RequestType'] != 'Create':
+                  cfnresponse.send(event, context, cfnresponse.SUCCESS,
+                                  response_data, "CustomResourcePhysicalID")
+                  return
+
+              password = event['ResourceProperties']['Password']
+              confirm_password = event['ResourceProperties']['ConfirmPassword']
+
+              if password == confirm_password:
+                  cfnresponse.send(event, context, cfnresponse.SUCCESS,
+                                  response_data, "CustomResourcePhysicalID")
+              else:
+                  print('Passwords do not match!')
+                  cfnresponse.send(event, context, cfnresponse.FAILED,
+                                  response_data, "CustomResourcePhysicalID")
+      
+      Description: CloudFormation custom resource
+      FunctionName: CheckPasswords
+      Handler: index.lambda_handler
+      Runtime: python3.7
+      Timeout: 3
+      Role: !GetAtt LambdaExecutionRole.Arn
+  
+  TestPasswords:
+    Type: Custom::LambdaCallout
+    Properties:
+      ServiceToken: !GetAtt CheckPasswordsFunction.Arn
+      Password: !Ref Password
+      ConfirmPassword: !Ref ConfirmPassword
 
 Outputs:
   AccessKey:
