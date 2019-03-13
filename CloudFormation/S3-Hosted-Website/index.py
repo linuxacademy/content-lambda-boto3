@@ -78,15 +78,3 @@ def upload_to_s3(bucket, path):
                 print(f'Uploading: {full_path} [{mime_type}]')
                 bucket.put_object(
                     Key=full_path[len(path)+1:], Body=data, ContentType=mime_type)
-
-
-if __name__ == "__main__":
-    event = {
-        'ResourceProperties': {
-            'BucketName': 'deploytos3-s3bucket-t64wa3xyw4fu',
-            'RepoSubdir': 'WebApps/Contact-Form/webapp',
-            'RepoURL': 'https://github.com/linuxacademy/content-lambda-boto3/'
-        },
-        'ResponseURL': 'https://example.com'
-    }
-    lambda_handler(event, {})
