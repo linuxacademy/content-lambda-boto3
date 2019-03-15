@@ -97,7 +97,7 @@ def get_message_text(differences, last_commit):
 def publish(repository, message):
     sns.publish(
         TopicArn=SNS_TOPIC_ARN,
-        Subject='CodeCommit Update - Repository: {0}'.format(repository),
+        Subject=f'CodeCommit Update - Repository: {repository}',
         Message=message
     )
 
