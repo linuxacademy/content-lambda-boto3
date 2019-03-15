@@ -15,6 +15,15 @@ Note the `cloneUrlHttp` and `Arn` values in the response.
 
 ## Create and Subscribe to the SNS Topic
 
+```sh
+aws sns create-topic --name CodeCommitChangeNotification
+
+aws sns subscribe \
+--topic-arn arn:aws:sns:us-east-1:123456789012:CodeCommitChangeNotification \
+--protocol email \
+--notification-endpoint my-email@example.com
+```
+
 ## Create IAM Lambda Execution Role
 
 1. Add `AWSLambdaBasicExecutionRole`
@@ -37,6 +46,12 @@ Note the `cloneUrlHttp` and `Arn` values in the response.
 ## Create the Lambda Function
 
 Name: **CodeCommitChangeNotification**
+
+Set the following enviornment variables:
+
+`REPOSITORY_NAME` = `ChangeNotification`
+
+`SNS_TOPIC_ARN` = `arn:aws:sns:us-east-1:123456789012:CodeCommitChangeNotification`
 
 ## Create the CloudWatch Event Rule
 

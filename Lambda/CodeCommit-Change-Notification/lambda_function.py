@@ -1,5 +1,4 @@
 import datetime
-import json
 import os
 
 import boto3
@@ -29,23 +28,7 @@ def get_diff(repository_name, last_commit_id, previous_commit_id):
             afterCommitSpecifier=last_commit_id
         )
 
-    differences = []
-
-    if response is None:
-        return differences
-
-    while "nextToken" in response:
-        response = codecommit.get_differences(
-            repositoryName=repository_name,
-            beforeCommitSpecifier=previous_commit_id,
-            afterCommitSpecifier=last_commit_id,
-            nextToken=response["nextToken"]
-        )
-        differences += response.get("differences", [])
-    else:
-        differences += response["differences"]
-
-    return differences
+    return response["differences"]
 
 
 def get_diff_change_message_type(change_type):
@@ -74,7 +57,6 @@ def get_last_commit_log(repository, commit_id):
 
 
 def get_message_text(differences, last_commit):
-    print(last_commit)
     text = ''
     commit_id = last_commit['commitId']
     text += f'commit ID: {commit_id}\n'
@@ -98,7 +80,8 @@ def get_message_text(differences, last_commit):
                 get_diff_change_message_type(diff['changeType']),
                 diff['beforeBlob']['blobId'])
 
-    text += (f'Commit: https://{AWS_DEFAULT_REGION}.console.aws.amazon.com/codesuite/'
+    text += (f'Commit: '
+             f'https://{AWS_DEFAULT_REGION}.console.aws.amazon.com/codesuite/'
              f'codecommit/repositories/{REPOSITORY_NAME}/commit/{commit_id}?'
              f'region={AWS_DEFAULT_REGION}')
 
@@ -114,13 +97,10 @@ def publish(repository, message):
 
 
 def lambda_handler(event, context):
-    print(json.dumps(event))
-
-    repository = REPOSITORY_NAME
 
     try:
-        last_commit_id = get_last_commit_id(repository, MAIN_BRANCH_NAME)
-        last_commit = get_last_commit_log(repository, last_commit_id)
+        last_commit_id = get_last_commit_id(REPOSITORY_NAME, MAIN_BRANCH_NAME)
+        last_commit = get_last_commit_log(REPOSITORY_NAME, last_commit_id)
 
         previous_commit_id = None
         if len(last_commit['parents']) > 0:
@@ -129,15 +109,18 @@ def lambda_handler(event, context):
         print(f'Last commit ID: {last_commit_id}')
         print(f'Previous commit ID: {previous_commit_id}')
 
-        differences = get_diff(repository, last_commit_id, previous_commit_id)
+        differences = get_diff(
+            REPOSITORY_NAME, last_commit_id, previous_commit_id)
         message_text = get_message_text(differences, last_commit)
 
-        return publish(repository, message_text)
+        print(message_text)
+
+        return publish(REPOSITORY_NAME, message_text)
 
     except Exception as e:
         import traceback
         print(e)
         traceback.print_exc()
-        print(f'Error getting repository {repository}. Ensure it exists in the '
-              'same region as this function.')
+        print(f'Error getting repository {REPOSITORY_NAME}. Ensure it exists '
+              'in the same region as this function.')
         raise e
