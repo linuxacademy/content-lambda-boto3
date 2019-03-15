@@ -13,22 +13,28 @@ sns = boto3.client('sns')
 
 
 def get_diff(repository_name, last_commit_id, previous_commit_id):
-    response = None
+    differences = []
+    response_iterator = None
 
-    if previous_commit_id is not None:
-        response = codecommit.get_differences(
+    paginator = codecommit.get_paginator('get_differences')
+
+    if previous_commit_id is None:
+        # This was the first commit (no previous, omit beforeCommitSpecifier)
+        response_iterator = paginator.paginate(
             repositoryName=repository_name,
-            beforeCommitSpecifier=previous_commit_id,
-            afterCommitSpecifier=last_commit_id
+            afterCommitSpecifier=last_commit_id,
         )
     else:
-        # This was the first commit (no previous, omit beforeCommitSpecifier)
-        response = codecommit.get_differences(
+        response_iterator = paginator.paginate(
             repositoryName=repository_name,
-            afterCommitSpecifier=last_commit_id
+            beforeCommitSpecifier=previous_commit_id,
+            afterCommitSpecifier=last_commit_id,
         )
 
-    return response["differences"]
+    for response in response_iterator:
+        differences += response["differences"]
+
+    return differences
 
 
 def get_diff_change_message_type(change_type):
