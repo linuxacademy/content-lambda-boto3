@@ -1,0 +1,21 @@
+{
+  "version": "0",
+  "id": "c795db7d-0239-f083-da1e-6d3ba7ab8c9e",
+  "detail-type": "CodeCommit Repository State Change",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2019-03-15T14:40:40Z",
+  "region": "us-east-1",
+  "resources": ["arn:aws:codecommit:us-east-2:123456789012:ChangeNotification"],
+  "detail": {
+    "referenceFullName": "refs/heads/master",
+    "repositoryId": "a2d1f4ae-02d0-4c1c-8bd3-cba39b73ed90",
+    "referenceType": "branch",
+    "commitId": "91bf2aa7c2d04523df8b7cfbfee20c53d7be77e4",
+    "event": "referenceUpdated",
+    "repositoryName": "ChangeNotification",
+    "callerUserArn": "arn:aws:iam::123456789012:user/mrichman",
+    "oldCommitId": "b4940d6b9ac85469a351b4da1769e4301c9c3fc",
+    "referenceName": "master"
+  }
+}
