@@ -1,0 +1,27 @@
+{
+  "AlarmName": "cpu-mon",
+  "AlarmDescription": "Alarm when CPU exceeds 40%",
+  "AWSAccountId": "123456789012",
+  "NewStateValue": "ALARM",
+  "NewStateReason": "Threshold Crossed: 1 datapoint [99.0 (18/03/19 18:06:00)] was greater than or equal to the threshold (40.0).",
+  "StateChangeTime": "2019-03-18T18:11:58.507+0000",
+  "Region": "US East (Ohio)",
+  "OldStateValue": "OK",
+  "Trigger": {
+    "MetricName": "CPUUtilization",
+    "Namespace": "AWS/EC2",
+    "StatisticType": "Statistic",
+    "Statistic": "AVERAGE",
+    "Unit": null,
+    "Dimensions": [{
+      "value": "i-12345678901234567",
+      "name": "InstanceId"
+    }],
+    "Period": 300,
+    "EvaluationPeriods": 1,
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Threshold": 40,
+    "TreatMissingData": "",
+    "EvaluateLowSampleCountPercentile": ""
+  }
+}

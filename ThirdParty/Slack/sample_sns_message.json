@@ -1,0 +1,20 @@
+{
+  "Records": [{
+    "EventSource": "aws:sns",
+    "EventVersion": "1.0",
+    "EventSubscriptionArn": "arn:aws:sns:us-east-2:123456789012:high-cpu-alarm:37113ff5-bc0f-47e7-93cb-a568393b1cdf",
+    "Sns": {
+      "Type": "Notification",
+      "MessageId": "c5185dee-b948-5a60-8240-08e75ff37af7",
+      "TopicArn": "arn:aws:sns:us-east-2:123456789012:high-cpu-alarm",
+      "Subject": "ALARM: \"cpu-mon\" in US East (Ohio)",
+      "Message": "{\"AlarmName\":\"cpu-mon\",\"AlarmDescription\":\"Alarm when CPU exceeds 40%\",\"AWSAccountId\":\"123456789012\",\"NewStateValue\":\"ALARM\",\"NewStateReason\":\"Threshold Crossed: 1 datapoint [99.66666666666667 (18/03/19 18:28:00)] was greater than or equal to the threshold (40.0).\",\"StateChangeTime\":\"2019-03-18T18:33:31.823+0000\",\"Region\":\"US East (Ohio)\",\"OldStateValue\":\"OK\",\"Trigger\":{\"MetricName\":\"CPUUtilization\",\"Namespace\":\"AWS/EC2\",\"StatisticType\":\"Statistic\",\"Statistic\":\"AVERAGE\",\"Unit\":null,\"Dimensions\":[{\"value\":\"i-0bae13e726155adc3\",\"name\":\"InstanceId\"}],\"Period\":300,\"EvaluationPeriods\":1,\"ComparisonOperator\":\"GreaterThanOrEqualToThreshold\",\"Threshold\":40.0,\"TreatMissingData\":\"\",\"EvaluateLowSampleCountPercentile\":\"\"}}",
+      "Timestamp": "2019-03-18T18:33:31.872Z",
+      "SignatureVersion": "1",
+      "Signature": "WiZ8lP42Gu7VHwgBWW1wuXtYlP5why37F5BV/8jxhNmdJVLjwdqbP6lEmPrvz3qNnhxly5P2UPGqCkB6B6U1HCXR+9Xt4td9boMs9mf3zAkC93rJbnUEkURmuIcSqlaSZ0odPK/53VCR3mYkQUc9nkOVBVvlrIAFhx8EtUme7MHV0sju1pchkunTECv9cSmbn9TP2SNkai+KIRfzFSXA7aEsr1m/VbLrzIAynWtxRdO+hksZdkFXd8pm3R5B6ElipuiIErQbVjF9hc7ytFqxIZBP8b5Vpq8ecaoV2g87zuZ7p+bY118td95IT6f9xATMZuv1hwm4LwRn5SukWQ+EQw==",
+      "SigningCertUrl": "https://sns.us-east-2.amazonaws.com/SimpleNotificationService-6aad65c2f9911b05cd53efda11f913f9.pem",
+      "UnsubscribeUrl": "https://sns.us-east-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-2:123456789012:high-cpu-alarm:37113ff5-bc0f-47e7-93cb-a568393b1cdf",
+      "MessageAttributes": {}
+    }
+  }]
+}
