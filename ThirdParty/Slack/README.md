@@ -9,8 +9,6 @@
 1. Choose the default channel where messages will be sent and click **Authorize**.
 1. Note the webhook URL from the **Webhook URLs for Your Workspace** section. For example, `https://hooks.slack.com/services/T0HABCGK/BDEFG93SS/BeBSKJHDHmWwyv2SYV4apv1O`
 
-F
-
 ```sh
 WEBHOOK_URL=https://hooks.slack.com/services/T0HABCGK/BDEFG93SS/BeBSKJHDHmWwyv2SYV4apv1O
 ```
