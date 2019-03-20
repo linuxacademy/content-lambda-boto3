@@ -1,6 +1,6 @@
-# Twitter Bot
+# Creating a Twitter App
 
-automatically tweet on a schedule
+In this lesson, you will learn to create a Twitter app that automatically sends tweets on a schedule.
 
 ## Create Twitter Application
 
@@ -68,6 +68,7 @@ cd package
 zip -r9 ../package.zip .
 cd ..
 zip -g package.zip lambda_handler.py
+rm -rf package/*
 ```
 
 <!--
