@@ -1,10 +1,18 @@
 {
   "Version": "2012-10-17",
   "Statement": [{
-    "Effect": "Allow",
-    "Action": [
-      "s3:GetObject"
-    ],
-    "Resource": "arn:aws:s3:::{bucket-name}/*"
-  }]
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::123456789012-twitterbot/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameter"
+      ],
+      "Resource": "arn:aws:ssm:us-east-2:123456789012:parameter/TwitterBot*"
+    }
+  ]
 }

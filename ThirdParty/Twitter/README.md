@@ -8,11 +8,13 @@ More info here <https://developer.twitter.com/en/docs/basics/apps/overview>.
 
 Note the Consumer API keys and Access token & access token secret.
 
+You can set these as environment variables, should you wish to create the SSM parameters using the AWS CLI:
+
 ```sh
-CONSUMER_KEY=...
-CONSUMER_SECRET=...
-ACCESS_TOKEN=...
-ACCESS_TOKEN_SECRET=...
+CONSUMER_KEY=5YAAipG8DLKjhdkjfhfQMZyuYhJ
+CONSUMER_SECRET=qi3YF6hzdflkjLKJFZgJ6J3WwmEktMfX0IwPQMas
+ACCESS_TOKEN=110809243434444423-pHHgCWvWOhc1KJHSLKJHFCAyrDOq0cR
+ACCESS_TOKEN_SECRET=QXesCU9LKJHFLKJHKFF9FFVOjymg9UIDvRa58ySaQjd7357
 ```
 
 ## Create SSM Parameters
@@ -44,12 +46,20 @@ Grant access to your S3 bucket:
 {
   "Version": "2012-10-17",
   "Statement": [{
-    "Effect": "Allow",
-    "Action": [
-      "s3:GetObject"
-    ],
-    "Resource": "arn:aws:s3:::123456789012-twitterbot/*"
-  }]
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::123456789012-twitterbot/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameter"
+      ],
+      "Resource": "arn:aws:ssm:us-east-2:123456789012:parameter/TwitterBot*"
+    }
+  ]
 }
 ```
 
@@ -67,16 +77,9 @@ pip install -r requirements.txt --no-deps -t package
 cd package
 zip -r9 ../package.zip .
 cd ..
-zip -g package.zip lambda_handler.py
+zip -g package.zip lambda_function.py
 rm -rf package/*
 ```
-
-<!--
-## Update Lambda funcion
-
-```sh
-aws lambda update-function-code --function-name TwitterBot --zip-file fileb://package.zip
-``` -->
 
 ## Create Lambda function
 
