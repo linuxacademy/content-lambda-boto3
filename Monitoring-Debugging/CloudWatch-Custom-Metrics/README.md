@@ -1,6 +1,6 @@
 # Publishing Custom Metrics from Lambda
 
-Install the demo app using the [AWS Serverless Application Model](https://aws.amazon.com/serverless/sam/)
+Install the demo app using the [AWS Serverless Application Model](https://aws.amazon.com/serverless/sam/). You can find instructions to install the AWS SAM CLI [here](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html).
 
 ## Create the Lambda deployment package
 

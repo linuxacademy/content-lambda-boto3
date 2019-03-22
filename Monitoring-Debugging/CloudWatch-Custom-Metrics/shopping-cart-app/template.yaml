@@ -22,12 +22,7 @@ Resources:
             Path: /cart/add
             Method: get
       Policies:
-        - Statement:
-          - Sid: CloudWatchPutMetricDataPolicy
-            Effect: Allow
-            Action:
-            - cloudwatch:PutMetricData
-            Resource: '*'
+      - CloudWatchPutMetricPolicy: {}
 
   PurchaseFunction:
     Type: AWS::Serverless::Function
@@ -40,12 +35,7 @@ Resources:
             Path: /cart/purchase
             Method: get
       Policies:
-        - Statement:
-          - Sid: CloudWatchPutMetricDataPolicy
-            Effect: Allow
-            Action:
-            - cloudwatch:PutMetricData
-            Resource: '*'
+      - CloudWatchPutMetricPolicy: {}
 
   ViewProductFunction:
     Type: AWS::Serverless::Function
@@ -58,12 +48,7 @@ Resources:
             Path: /products/123456
             Method: get
       Policies:
-        - Statement:
-          - Sid: CloudWatchPutMetricDataPolicy
-            Effect: Allow
-            Action:
-            - cloudwatch:PutMetricData
-            Resource: '*'
+      - CloudWatchPutMetricPolicy: {}
 
 Outputs:
   AddToCartApi:
