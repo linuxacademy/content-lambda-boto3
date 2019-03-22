@@ -1,5 +1,6 @@
-.aws-sam
-packaged.yaml
+shopping-cart-app/.aws-sam
+shopping-cart-app/packaged.yaml
+results.bin
 
 # Created by https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
 

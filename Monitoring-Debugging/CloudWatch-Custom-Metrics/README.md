@@ -37,21 +37,31 @@ sam deploy \
 
 ## Locate API Gateway Endpoint URLs
 
-1. Open the AWS CloudFormation console at [https://console\.aws\.amazon\.com/cloudformation](https://console.aws.amazon.com/cloudformation/)\.
+1. Open the AWS CloudFormation console at <https://console.aws.amazon.com/cloudformation>.
 1. Choose the AWS CloudFormation stack that you created in the preceding step from the list shown\.
 1. Under **Outputs**, note the API Gateway endpoint URLs.
 1. Browse each and observe the JSON responses.
 
 ## Generate Traffic
 
-Using the API Gateway endpoint URLs in the previous step, generate load against each of these endpoints.
+Using the API Gateway endpoint URLs in the previous step, generate traffic against each of these endpoints.
+
+Run an HTTP testing tool like [vegeta](https://github.com/tsenart/vegeta) to generate traffic to your API gateway endpoints:
 
 Modify `URLs.txt` to use the endpoint URLs in your account.
 
-Run [Apache Bench](http://httpd.apache.org/docs/2.4/programs/ab.html) using [parallel](http://www.gnu.org/software/parallel/):
+Run a test for 60 minutes:
 
 ```sh
-cat URLs.txt | parallel 'ab -c 350 -n 20000 {}'
+cat URLS.txt | vegeta attack -duration=60m | tee results.bin | vegeta report
 ```
 
 ## View Custom Metrics
+
+You may view custom metric data while a load test is in progress.
+
+1. Open the CloudWatch console at <https://console.aws.amazon.com/cloudwatch>.
+1. Navigate to **Metrics**.
+1. Under **All metrics**, select **ShoppingCartApp**.
+1. Select **Metrics with no dimensions**.
+1. Select **ItemsAddedToCart**, **OrderTotal**, and **ViewProduct**.

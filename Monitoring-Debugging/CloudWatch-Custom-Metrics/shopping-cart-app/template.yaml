@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Shopping cart app
+
+Globals:
+  Function:
+    Handler: app.lambda_handler
+    Runtime: python3.7
+    Tracing: Active
+    Timeout: 3
+
+Resources:
+ 
+  AddToCartFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: add_to_cart/
+      Events:
+        AddToCart:
+          Type: Api
+          Properties:
+            Path: /cart/add
+            Method: get
+      Policies:
+        - Statement:
+          - Sid: CloudWatchPutMetricDataPolicy
+            Effect: Allow
+            Action:
+            - cloudwatch:PutMetricData
+            Resource: '*'
+
+  PurchaseFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: purchase/
+      Events:
+        Purchase:
+          Type: Api
+          Properties:
+            Path: /cart/purchase
+            Method: get
+      Policies:
+        - Statement:
+          - Sid: CloudWatchPutMetricDataPolicy
+            Effect: Allow
+            Action:
+            - cloudwatch:PutMetricData
+            Resource: '*'
+
+  ViewProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: view_product/
+      Events:
+        ViewProduct:
+          Type: Api
+          Properties:
+            Path: /products/123456
+            Method: get
+      Policies:
+        - Statement:
+          - Sid: CloudWatchPutMetricDataPolicy
+            Effect: Allow
+            Action:
+            - cloudwatch:PutMetricData
+            Resource: '*'
+
+Outputs:
+  AddToCartApi:
+    Description: "API Gateway endpoint URL for Prod stage for AddToCart function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/cart/add"
+  AddToCartFunction:
+    Description: "AddToCart Lambda Function ARN"
+    Value: !GetAtt AddToCartFunction.Arn
+  AddToCartFunctionIamRole:
+    Description: "Implicit IAM Role created for AddToCart function"
+    Value: !GetAtt AddToCartFunctionRole.Arn
+  PurchaseApi:
+    Description: "API Gateway endpoint URL for Prod stage for Purchase function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/cart/purchase"
+  PurchaseFunction:
+    Description: "Purchase Lambda Function ARN"
+    Value: !GetAtt PurchaseFunction.Arn
+  PurchaseFunctionIamRole:
+    Description: "Implicit IAM Role created for Purchase function"
+    Value: !GetAtt PurchaseFunctionRole.Arn
+  ViewProductApi:
+    Description: "API Gateway endpoint URL for Prod stage for ViewProduct function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/products/123456"
+  ViewProductFunction:
+    Description: "ViewProduct Lambda Function ARN"
+    Value: !GetAtt ViewProductFunction.Arn
+  ViewProductFunctionIamRole:
+    Description: "Implicit IAM Role created for ViewProduct function"
+    Value: !GetAtt ViewProductFunctionRole.Arn

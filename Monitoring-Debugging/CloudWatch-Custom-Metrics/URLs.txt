@@ -1,0 +1,3 @@
+GET https://q4mss37szc.execute-api.us-east-2.amazonaws.com/Prod/cart/add
+GET https://q4mss37szc.execute-api.us-east-2.amazonaws.com/Prod/cart/purchase
+GET https://q4mss37szc.execute-api.us-east-2.amazonaws.com/Prod/products/123456
