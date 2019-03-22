@@ -1,0 +1,39 @@
+-i https://pypi.org/simple
+argcomplete==1.9.3
+aws-xray-sdk==2.4.2
+boto3==1.9.119
+botocore==1.12.119
+certifi==2019.3.9
+cfn-flip==1.1.0.post1
+chardet==3.0.4
+click==7.0
+docutils==0.14
+durationpy==0.5
+flask==1.0.2
+future==0.16.0
+hjson==3.0.1
+idna==2.8
+itsdangerous==1.1.0
+jinja2==2.10
+jmespath==0.9.3
+jsonpickle==1.1
+kappa==0.6.0
+lambda-packages==0.20.0
+markupsafe==1.1.1
+placebo==0.9.0
+python-dateutil==2.6.1 ; python_version >= '2.7'
+python-slugify==1.2.4
+pyyaml==5.1
+requests==2.21.0
+s3transfer==0.2.0
+six==1.12.0
+toml==0.10.0
+tqdm==4.19.1
+troposphere==2.4.6
+unidecode==1.0.23
+urllib3==1.24.1 ; python_version >= '3.4'
+werkzeug==0.15.1
+wheel==0.33.1
+wrapt==1.11.1
+wsgi-request-logger==0.4.6
+zappa==0.48.2

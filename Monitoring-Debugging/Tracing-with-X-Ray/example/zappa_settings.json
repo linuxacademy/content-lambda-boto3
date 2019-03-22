@@ -1,0 +1,16 @@
+{
+  "dev": {
+    "app_function": "app.app",
+    "aws_region": "us-east-2",
+    "profile_name": "default",
+    "project_name": "example",
+    "runtime": "python3.7",
+    "s3_bucket": "zappa-kh2jm4it1",
+    "xray_tracing": true,
+    "extra_permissions": [{
+      "Effect": "Allow",
+      "Action": ["ssm:GetParameter"],
+      "Resource": "*"
+    }]
+  }
+}
