@@ -20,6 +20,7 @@ aws dynamodb create-table --table-name Flask \
 ## Configure Zappa
 
 ```sh
+cd example
 pipenv --python 3.7
 pipenv shell
 pipenv install aws-xray-sdk flask zappa requests

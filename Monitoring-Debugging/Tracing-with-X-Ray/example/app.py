@@ -1,4 +1,3 @@
-import json
 import logging
 import uuid
 
@@ -6,11 +5,11 @@ import boto3
 import requests
 from flask import Flask
 
-from aws_xray_sdk.core import patcher, xray_recorder
+from aws_xray_sdk.core import patch_all, xray_recorder
 from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
 
-# Patch the requests module to enable automatic instrumentation
-patcher.patch(('requests',))
+# Patch all supported modules to enable automatic instrumentation
+patch_all()
 
 app = Flask(__name__)
 logging.basicConfig()
@@ -29,9 +28,6 @@ ssm = boto3.client('ssm')
 
 table_param = ssm.get_parameter(Name='/dev/example/table_name')
 table_name = table_param['Parameter']['Value']
-
-logger.info('Table name:' + table_name)
-
 table = dynamodb.Table(table_name)
 
 
@@ -41,12 +37,14 @@ def hello_world():
 
     logger.debug(r.text)
 
+    xray_recorder.begin_subsegment('DynamoDB PutItem')
     table.put_item(
         Item={
             'key': str(uuid.uuid1()),
             'response': r.text
         }
     )
+    xray_recorder.end_subsegment()
 
     return 'Hello, World: %s' % r.url
 
