@@ -1,11 +1,5 @@
 # Tracing with X-Ray
 
-## Create SSM Parameter
-
-```sh
-aws ssm put-parameter --type String --name "/dev/example/table_name" --value "Flask"
-```
-
 ## Create DynamoDB Table
 
 Create table `Flask` with primary partition key `key`:
@@ -17,7 +11,7 @@ aws dynamodb create-table --table-name Flask \
   --billing-mode=PAY_PER_REQUEST
 ```
 
-## Configure Zappa
+## Configure [Zappa](https://github.com/Miserlou/Zappa)
 
 ```sh
 cd example
@@ -26,6 +20,17 @@ pipenv shell
 pipenv install aws-xray-sdk flask zappa requests
 pipenv lock -r > requirements.txt
 zappa init
+```
+
+Add the following property to `zappa_settings.json`:
+
+```json
+"xray_tracing": true
+```
+
+Deploy the application:
+
+```sh
 zappa deploy
 ```
 

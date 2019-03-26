@@ -6,11 +6,6 @@
     "project_name": "example",
     "runtime": "python3.7",
     "s3_bucket": "zappa-kh2jm4it1",
-    "xray_tracing": true,
-    "extra_permissions": [{
-      "Effect": "Allow",
-      "Action": ["ssm:GetParameter"],
-      "Resource": "*"
-    }]
+    "xray_tracing": true
   }
 }

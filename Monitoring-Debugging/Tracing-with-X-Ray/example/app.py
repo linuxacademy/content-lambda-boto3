@@ -24,11 +24,7 @@ XRayMiddleware(app, xray_recorder)
 
 # Boto3 resources
 dynamodb = boto3.resource('dynamodb')
-ssm = boto3.client('ssm')
-
-table_param = ssm.get_parameter(Name='/dev/example/table_name')
-table_name = table_param['Parameter']['Value']
-table = dynamodb.Table(table_name)
+table = dynamodb.Table('Flask')
 
 
 @app.route('/')
