@@ -1,8 +1,8 @@
-import datetime
+from datetime import datetime
 
 import boto3
 
-MAX_BACKUPS = 3
+MAX_BACKUPS = 3  # maximum number of backups to retain
 
 dynamo = boto3.client('dynamodb')
 
@@ -18,12 +18,12 @@ def lambda_handler(event, context):
 
 def create_backup(table_name):
     print("Backing up table:", table_name)
-    backup_name = table_name + '-' + datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+    backup_name = table_name + '-' + datetime.now().strftime('%Y%m%d%H%M%S')
 
     response = dynamo.create_backup(
         TableName=table_name, BackupName=backup_name)
 
-    print(response)
+    print(f"Created backup {response['BackupDetails']['BackupName']}")
 
 
 def delete_old_backups(table_name):
@@ -38,16 +38,25 @@ def delete_old_backups(table_name):
         print("No stale backups. Exiting.")
         return
 
+    # Backups in date descending order (newest to oldest)
     sorted_list = sorted(backups['BackupSummaries'],
-                         key=lambda k: k['BackupCreationDateTime'])
+                         key=lambda k: k['BackupCreationDateTime'], reverse=True)
 
-    old_backups = sorted_list[:MAX_BACKUPS]
+    old_backups = sorted_list[MAX_BACKUPS:]
+
+    print(f'Old backups: {old_backups}')
 
     for backup in old_backups:
         arn = backup['BackupArn']
         print("ARN to delete: " + arn)
         deleted_arn = dynamo.delete_backup(BackupArn=arn)
+        backup_name = deleted_arn['BackupDescription']['BackupDetails']['BackupName']
         status = deleted_arn['BackupDescription']['BackupDetails']['BackupStatus']
-        print("Status:", status)
+        print(f'BackupName: {backup_name}, Status: {status}')
 
     return
+
+
+if __name__ == "__main__":
+    event = {"TableName": "Movies"}
+    lambda_handler(event, {})
