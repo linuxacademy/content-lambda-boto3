@@ -7,7 +7,7 @@ dynamodb = boto3.resource('dynamodb')
 
 table = dynamodb.Table('Movies')
 
-with open("moviedata.json") as json_file:
+with open("DynamoDB/moviedata.json") as json_file:
     movies = json.load(json_file, parse_float=decimal.Decimal)
     for movie in movies:
         year = int(movie['year'])
