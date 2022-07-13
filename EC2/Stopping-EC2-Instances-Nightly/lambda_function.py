@@ -23,3 +23,4 @@ def lambda_handler(event, context):
         for instance in instances:
             instance.stop()
             print('Stopped instance: ', instance.id)
+#testedit
