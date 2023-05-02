@@ -4,7 +4,7 @@ import os
 import boto3
 
 AWS_DEFAULT_REGION = os.environ["AWS_DEFAULT_REGION"]
-MAIN_BRANCH_NAME = os.getenv('MAIN_BRANCH_NAME', 'master')
+MAIN_BRANCH_NAME = os.getenv('MAIN_BRANCH_NAME', 'main') # CodeCommit now use 'main' branch rather than 'master' branch 
 REPOSITORY_NAME = os.environ['REPOSITORY_NAME']
 SNS_TOPIC_ARN = os.environ['SNS_TOPIC_ARN']
 
