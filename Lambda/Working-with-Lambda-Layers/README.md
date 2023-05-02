@@ -3,7 +3,7 @@
 Create a new virtual environment using `pipenv` and install the required libraries:
 
 ```sh
-pipenv --python 3.7
+pipenv --python 3.10 #3.7
 pipenv shell
 pipenv install requests
 ```
@@ -23,11 +23,11 @@ pip3 install pipenv --user
 Create the ZIP deployment package:
 
 ```sh
-PY_DIR='build/python/lib/python3.7/site-packages'
+PY_DIR='build/python/lib/python3.10/site-packages' #in place of python3.7
 # Create temporary build directory
 mkdir -p $PY_DIR
 # Generate requirements file
-pipenv lock -r > requirements.txt
+pipenv requirement > requirements.txt # This is in place of previous " pipenv lock -r > requirements.txt"
 # Install packages into the target directory
 pip install -r requirements.txt --no-deps -t $PY_DIR
 cd build
