@@ -18,7 +18,8 @@ ses = boto3.client('ses', region_name=SES_REGION)
 
 def lambda_handler(event, context):
     print(event)
-    data = json.loads(event['body'])
+    # data = json.loads(event['body']) # Per my recent tryout 5/1/2023, "event" already showed a single dictionary structure. 
+    data = event                       # Therefore, there is no need to use json.loads() method.
     print(json.dumps(data))
 
     try:
