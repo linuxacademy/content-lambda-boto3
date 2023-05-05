@@ -1,0 +1,1 @@
+arn:aws:iam::597503565311:role/VPCFlowLogsRole
