@@ -1,0 +1,11 @@
+{
+    "dev": {
+        "app_function": "app.app",
+        "aws_region": "us-east-1",
+        "profile_name": "default",
+        "project_name": "example",
+        "runtime": "python3.10",
+        "s3_bucket": "zappa-426buj6wl",
+        "xray_tracing": true
+    }
+}

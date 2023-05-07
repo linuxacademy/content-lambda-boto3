@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "definitions": {
+    "parameter": {
+      "properties": {
+        "Description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Description"
+      ],
+      "title": "Information about a single parameter",
+      "type": "object"
+    },
+    "parameters": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-zA-Z0-9]+$": {
+          "$ref": "#/definitions/parameter"
+        }
+      },
+      "title": "Object containing all parameters of a template",
+      "type": "object"
+    },
+    "policy_statement": {
+      "type": "object"
+    },
+    "policy_statements": {
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "Statement": {
+          "items": {
+            "$ref": "#/definitions/policy_statement"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "semver": {
+      "pattern": "^[0-9]+.[0-9]+.[0-9]+$",
+      "type": "string"
+    },
+    "template": {
+      "additionalProperties": false,
+      "properties": {
+        "Definition": {
+          "$ref": "#/definitions/policy_statements"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Parameters": {
+          "$ref": "#/definitions/parameters"
+        }
+      },
+      "required": [
+        "Parameters",
+        "Definition"
+      ],
+      "type": "object"
+    }
+  },
+  "properties": {
+    "Templates": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-zA-Z0-9]+Policy(_v[0-9])?$": {
+          "$ref": "#/definitions/template"
+        }
+      },
+      "type": "object"
+    },
+    "Version": {
+      "$ref": "#/definitions/semver"
+    }
+  },
+  "required": [
+    "Version",
+    "Templates"
+  ],
+  "title": "Schema for AWS SAM Policy Templates"
+}

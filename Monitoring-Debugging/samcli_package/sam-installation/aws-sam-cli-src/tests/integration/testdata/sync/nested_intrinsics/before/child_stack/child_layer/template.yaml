@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  HelloWorldLayerName:
+    Type: String
+    Description: Name of the HelloWorldLayer which will be used with current deployment
+
+Resources:
+  HelloWorldLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Ref HelloWorldLayerName
+      Description: Hello World Layer
+      ContentUri: layer/
+      CompatibleRuntimes:
+        - python3.7
+    Metadata:
+      BuildMethod: python3.7
+
+Outputs:
+  LayerName:
+    Description: The name of the Layer
+    Value: !Ref HelloWorldLayer

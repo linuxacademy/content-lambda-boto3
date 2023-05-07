@@ -29,7 +29,7 @@ table = dynamodb.Table('Flask')
 
 @app.route('/')
 def hello_world():
-    r = requests.get("https://linuxacademy.com")
+    r = requests.get("https://www.google.com")
 
     logger.debug(r.text)
 
