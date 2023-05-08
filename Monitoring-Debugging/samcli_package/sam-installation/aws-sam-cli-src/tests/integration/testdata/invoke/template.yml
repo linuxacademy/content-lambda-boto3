@@ -1,0 +1,216 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A hello world application.
+
+Parameters:
+  DefaultTimeout:
+    Default: 5
+    Type: Number
+
+  MyRuntimeVersion:
+    Type: String
+
+  StringValueTimeout:
+      Default: "5"
+      Type: Number
+
+  EmptyDefaultParameter:
+    Type: String
+    Default: ""
+
+  FunctionNameParam:
+    Type: String
+    Default: "MyReallyCoolFunction"
+
+  LayerVersion:
+    Type: String
+    Default: "2"
+
+Resources:
+  HelloWorldServerlessFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.handler
+      Runtime: python3.9
+      CodeUri: .
+      Timeout: 600
+
+  HelloWorldLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: main.handler
+      Runtime: python3.9
+      Timeout: 600
+
+  TimeoutFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.sleep_handler
+      Runtime: python3.9
+      CodeUri: .
+      Timeout: 5
+
+  HelloWorldSleepFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.sleep_handler
+      Runtime: python3.9
+      CodeUri: .
+      Timeout: 600
+
+  HelloWorldServerlessWithFunctionNameRefFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Ref FunctionNameParam
+      Handler: main.handler
+      Runtime: python3.9
+      CodeUri: .
+      Timeout: 600
+
+  EchoCustomEnvVarFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.custom_env_var_echo_hanler
+      Runtime: python3.9
+      CodeUri: .
+      Environment:
+        Variables:
+          CustomEnvVar: "MyOtherVar"
+      Timeout: 600
+  
+  EchoGlobalCustomEnvVarFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.custom_env_var_echo_hanler
+      Runtime: python3.9
+      CodeUri: .
+      Environment:
+        Variables:
+          CustomEnvVar: "MyOtherVar"
+      Timeout: 600
+
+  EchoCustomEnvVarWithFunctionNameDefinedFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: customname
+      Handler: main.custom_env_var_echo_hanler
+      Runtime: python3.9
+      CodeUri: .
+      Environment:
+        Variables:
+          CustomEnvVar: "MyOtherVar"
+      Timeout: 600
+
+  WriteToStderrFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.write_to_stderr
+      Runtime: python3.9
+      CodeUri: .
+      Timeout: 600
+
+  WriteToStdoutFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.write_to_stdout
+      Runtime: python3.9
+      CodeUri: .
+      Timeout: 600
+
+  EchoEventFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.echo_event
+      Runtime: python3.9
+      CodeUri: .
+      Timeout: 600
+
+  RaiseExceptionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.raise_exception
+      Runtime: python3.7
+      CodeUri: .
+      Timeout: 600
+
+  TimeoutFunctionWithParameter:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.sleep_handler
+      Runtime: python3.9
+      CodeUri: .
+      Timeout:
+        Ref: DefaultTimeout
+
+  FunctionWithMetadata:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.9
+      Handler: main.echo_hello_world
+      Timeout: 600
+    Metadata:
+      aws:asset:property: CodeUri
+      aws:asset:path: ./different_code_location
+
+  EchoEnvWithParameters:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.env_var_echo_hanler
+      Runtime: python3.9
+      CodeUri: .
+      Timeout: 600
+      Environment:
+        Variables:
+          Region: !Ref "AWS::Region"
+          AccountId: !Ref "AWS::AccountId"
+          Partition: !Ref "AWS::Partition"
+          StackName: !Ref "AWS::StackName"
+          StackId: !Ref "AWS::StackId"
+          URLSuffix: !Ref "AWS::URLSuffix"
+          Timeout: !Ref DefaultTimeout
+          MyRuntimeVersion: !Ref MyRuntimeVersion
+          EmptyDefaultParameter: !Ref EmptyDefaultParameter
+
+  TimeoutFunctionWithStringParameter:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.sleep_handler
+      Runtime: python3.9
+      CodeUri: .
+      Timeout:
+        Ref: StringValueTimeout
+
+  FunctionWithFunctionNameOverride:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: func-name-override
+      Handler: main.handler
+      Runtime: python3.9
+
+  EchoFunctionWithFunctionNameOverride:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: echo-func-name-override
+      Handler: main.echo_event
+      Runtime: python3.9
+      CodeUri: .
+
+  GitLayerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: main.execute_git
+      Runtime: python3.9
+      Layers:
+        - arn:aws:lambda:us-east-1:553035198032:layer:git-lambda2:5
+
+  GitLayerFunctionParameters:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: main.execute_git
+      Runtime: python3.9
+      Layers:
+        - !Sub "arn:aws:lambda:us-east-1:553035198032:layer:git-lambda2:${LayerVersion}"
+        
+# UTF-8 Test 😐

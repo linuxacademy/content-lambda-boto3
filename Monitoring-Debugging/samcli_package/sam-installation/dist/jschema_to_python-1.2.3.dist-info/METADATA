@@ -1,0 +1,71 @@
+Metadata-Version: 2.1
+Name: jschema-to-python
+Version: 1.2.3
+Summary: Generate source code for Python classes from a JSON schema.
+Home-page: https://github.com/microsoft/jschema-to-python
+Author: Microsoft Corporation
+Author-email: v-lgold@microsoft.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >= 2.7
+Requires-Dist: attrs
+Requires-Dist: jsonpickle
+Requires-Dist: pbr
+
+jschema-to-python
+=================
+
+Generate Python classes from a JSON schema.
+
+Usage
+=====
+::
+
+    python -m jschema_to_python [-h] -s SCHEMA_PATH -o OUTPUT_DIRECTORY [-m MODULE_NAME] -r ROOT_CLASS_NAME [-g HINTS_FILE_PATH] [-f] [-v]
+
+    Generate source code for a set of Python classes from a JSON schema.
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -s SCHEMA_PATH, --schema-path SCHEMA_PATH
+                            path to the JSON schema file
+      -o OUTPUT_DIRECTORY, --output-directory OUTPUT_DIRECTORY
+                            directory in which the generated classes will be
+                            created
+      -m MODULE_NAME, --module-name MODULE_NAME
+                            name of the module containing the object model classes
+      -r ROOT_CLASS_NAME, --root-class-name ROOT_CLASS_NAME
+                            the name of the class at the root of the object model
+                            represented by the schema
+      -g HINTS_FILE_PATH, --hints-file-path HINTS_FILE_PATH
+                            path to a file containing hints that control code
+                            generation
+      -f, --force           overwrite the output directory if it exists
+      -v, --verbose         increase output verbosity (may be specified up to two
+                            times)
+
+Contributing
+============
+
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the `Microsoft Open Source Code of Conduct <https://opensource.microsoft.com/codeofconduct/>`_.
+For more information see the `Code of Conduct FAQ <https://opensource.microsoft.com/codeofconduct/faq/>`_ or
+contact `opencode@microsoft.com <mailto:opencode@microsoft.com>`_ with any additional questions or comments.
+
+
+

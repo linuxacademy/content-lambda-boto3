@@ -5,7 +5,7 @@ Description: Shopping cart app
 Globals:
   Function:
     Handler: app.lambda_handler
-    Runtime: python3.7
+    Runtime: python3.10
     Tracing: Active
     Timeout: 3
 
